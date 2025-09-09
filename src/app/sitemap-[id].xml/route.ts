@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL = 'https://myfreenovel.com';   // ← 同一处改域名
+const BASE_URL = 'https://myfreenovel.com';
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;   // 多加一行 await
-  const id   = Number(params.id);
+  const id = Number((await params).id);   // ← 只留这一行取 id
   const PER_FILE = 5000;
   const start = (id - 1) * PER_FILE + 1;
-  // 生成 5 000 条 <url>
+
   const urls = Array.from({ length: PER_FILE }, (_, i) => {
     const cid = String(start + i).padStart(3, '0');
     return `
