@@ -2,10 +2,14 @@ import { NextResponse } from 'next/server';
 
 const BASE_URL = 'https://myfreenovel.com';
 
-export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
-  const id = Number((await params).id);   // ← 只留这一行取 id
+export async function GET(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const num = Number(id);
   const PER_FILE = 5000;
-  const start = (id - 1) * PER_FILE + 1;
+  const start = (num - 1) * PER_FILE + 1;
 
   const urls = Array.from({ length: PER_FILE }, (_, i) => {
     const cid = String(start + i).padStart(3, '0');
