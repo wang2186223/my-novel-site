@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextResponse } from 'next/server';
 
-const BASE_URL = 'https://myfreenovel.com';   // ← 改成你的真实域名
-const TOTAL_CHAPS = 200000;                  // 总章节数（先写 20 万）
-const PER_FILE   = 5000;                     // 每文件 5 000 条，Google 上限 5 万
+const BASE_URL = 'https://myfreenovel.com';   // 正式域名
+const TOTAL_CHAPS = 200000;
+const PER_FILE = 5000;
 
 export async function GET() {
   const files = Math.ceil(TOTAL_CHAPS / PER_FILE);
@@ -14,7 +15,5 @@ ${Array.from({ length: files }, (_, i) => `
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
   </sitemap>`).join('')}
 </sitemapindex>`;
-  return new NextResponse(xml, {
-    headers: { 'Content-Type': 'application/xml' },
-  });
+  return new NextResponse(xml, { headers: { 'Content-Type': 'application/xml' } });
 }

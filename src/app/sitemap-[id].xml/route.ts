@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextResponse } from 'next/server';
 
-const BASE_URL = 'https://myfreenovel.com';
+const BASE_URL = 'https://myfreenovel.com';   // 正式域名
 
-export async function GET(request: Request, context: { params: Promise<{}> }) {
-  // 先 await 再 as 断言，绕过 TS 严格检查
-  const resolved = (await context.params) as { id: string };
-  const id = Number(resolved.id);
-
+export async function GET(
+  _req: Request,
+  { params }: { params: Promise<Record<string, string>> }
+) {
+  const { id } = await params;
+  const num = Number(id);
   const PER_FILE = 5000;
-  const start = (id - 1) * PER_FILE + 1;
+  const start = (num - 1) * PER_FILE + 1;
 
   const urls = Array.from({ length: PER_FILE }, (_, i) => {
     const cid = String(start + i).padStart(3, '0');
@@ -25,7 +26,5 @@ export async function GET(request: Request, context: { params: Promise<{}> }) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
 </urlset>`;
-  return new NextResponse(xml, {
-    headers: { 'Content-Type': 'application/xml' },
-  });
+  return new NextResponse(xml, { headers: { 'Content-Type': 'application/xml' } });
 }
