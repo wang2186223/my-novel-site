@@ -2,12 +2,9 @@ import { NextResponse } from 'next/server';
 
 const BASE_URL = 'https://myfreenovel.com';
 
-export async function GET(
-  request: Request,
-  context: { params: Promise<{ id: string }> }
-) {
-  // 官方解包：先 await 再解构
-  const resolved = await context.params;
+export async function GET(request: Request, context: { params: Promise<{}> }) {
+  // 先 await 再 as 断言，绕过 TS 严格检查
+  const resolved = (await context.params) as { id: string };
   const id = Number(resolved.id);
 
   const PER_FILE = 5000;
