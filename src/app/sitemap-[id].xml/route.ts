@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextResponse } from 'next/server';
 
-const BASE_URL = 'https://myfreenovel.com';   // 正式域名
+const BASE_URL = 'https://novel.myfreenovel.com';   // 正式域名
 
 export async function GET(
   _req: Request,
