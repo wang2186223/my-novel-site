@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextResponse } from 'next/server';
 
 const BASE_URL = 'https://myfreenovel.com';
