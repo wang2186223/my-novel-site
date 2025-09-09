@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 
 const BASE_URL = 'https://myfreenovel.com';   // ← 同一处改域名
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;   // 多加一行 await
   const id   = Number(params.id);
   const PER_FILE = 5000;
   const start = (id - 1) * PER_FILE + 1;
