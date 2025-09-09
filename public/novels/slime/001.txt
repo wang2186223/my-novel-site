@@ -1,0 +1,31 @@
+001章节
+是我想要的内容
+
+# 进入项目
+cd my-novel-site
+
+
+
+# 立即启动，确认本地能开【chontrol+c 会关闭当前的本地部署，不能预览链接了】  
+http://localhost:3000/ 这是预览链接的地址
+
+npm run dev
+
+
+推送流程
+git add .
+git commit -m "fix: 同步大小写"    【汉字是标注用的】
+git push
+
+
+
+
+
+
+✅ 以后加页面
+路由	文件位置
+/	src/app/page.tsx
+/about	src/app/about/page.tsx
+/blog/[slug]	src/app/blog/[slug]/page.tsx
+
+不要建 pages 目录，否则会和 App Router 冲突导致 404。
